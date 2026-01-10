@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🩷 Compliment Site
 
 A soft and heartwarming compliment website built with Next.js and Framer Motion — designed to make someone feel special, appreciated, and genuinely smiled at 💗✨
@@ -69,3 +70,6 @@ Made with emotions by **Anuj** – _@anujbuilds_
 - The premium code can be used publicly **only if proper credit is given**:  
   `Website idea & code by @anujbuilds`  
 - Without credit or without explicit permission, public use is **not allowed**.
+=======
+# special-project
+>>>>>>> e0c984d82a41cd20dca0979db498513ce4fd14fd
