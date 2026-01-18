@@ -12,61 +12,34 @@ export default function BackgroundMusic() {
 
     audio.volume = 0.4;
     audio.loop = true;
+    audio.muted = true; // REQUIRED for mobile autoplay preparation
 
-    const startMusic = () => {
-      audio
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {});
-      window.removeEventListener("click", startMusic);
-      window.removeEventListener("touchstart", startMusic);
-      window.removeEventListener("keydown", startMusic);
+    const startMusic = async () => {
+      try {
+        audio.muted = false;   // unmute after user interaction
+        await audio.play();
+        setIsPlaying(true);
+      } catch (err) {
+        console.log("Music blocked until user interaction");
+      }
     };
 
-    window.addEventListener("click", startMusic);
-    window.addEventListener("touchstart", startMusic);
-    window.addEventListener("keydown", startMusic);
+    // First user interaction (mobile safe)
+    window.addEventListener("click", startMusic, { once: true });
+    window.addEventListener("touchstart", startMusic, { once: true });
 
     return () => {
       window.removeEventListener("click", startMusic);
       window.removeEventListener("touchstart", startMusic);
-      window.removeEventListener("keydown", startMusic);
     };
   }, []);
 
-  const toggleMusic = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.pause();
-      setIsPlaying(false);
-    } else {
-      audio.play().then(() => setIsPlaying(true));
-    }
-  };
-
   return (
-    <>
-      <audio ref={audioRef} src="/music/Dooron1.mp3" preload="auto" />
-
-      {/* <button
-        onClick={toggleMusic}
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          padding: "10px 15px",
-          borderRadius: "50px",
-          background: "#000",
-          color: "#fff",
-          border: "none",
-          cursor: "pointer",
-          zIndex: 1000,
-        }}
-      >
-        {isPlaying ? "⏸ Stop Music" : "▶ Play Music"}
-      </button> */}
-    </>
+    <audio
+      ref={audioRef}
+      src="/music/Dooron1.mp3"
+      preload="metadata"
+      playsInline   // REQUIRED for iOS Safari
+    />
   );
 }

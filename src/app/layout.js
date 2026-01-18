@@ -9,9 +9,13 @@ const quicksand = Quicksand({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${quicksand.className} bg-black antialiased select-none`}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${quicksand.className} bg-black antialiased select-none`}
+      >
+        {/* Background music must be inside body */}
         <BackgroundMusic />
+
         {children}
       </body>
     </html>
