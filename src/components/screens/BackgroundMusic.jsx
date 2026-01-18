@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function BackgroundMusic() {
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -13,7 +14,10 @@ export default function BackgroundMusic() {
     audio.loop = true;
 
     const startMusic = () => {
-      audio.play().catch(() => {});
+      audio
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {});
       window.removeEventListener("click", startMusic);
       window.removeEventListener("touchstart", startMusic);
       window.removeEventListener("keydown", startMusic);
@@ -30,6 +34,39 @@ export default function BackgroundMusic() {
     };
   }, []);
 
-  return <audio ref={audioRef} src="/music/Tera.mp3
-" preload="auto" />;
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().then(() => setIsPlaying(true));
+    }
+  };
+
+  return (
+    <>
+      <audio ref={audioRef} src="/music/Suno.mp3" preload="auto" />
+
+      {/* <button
+        onClick={toggleMusic}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          padding: "10px 15px",
+          borderRadius: "50px",
+          background: "#000",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+          zIndex: 1000,
+        }}
+      >
+        {isPlaying ? "⏸ Stop Music" : "▶ Play Music"}
+      </button> */}
+    </>
+  );
 }
