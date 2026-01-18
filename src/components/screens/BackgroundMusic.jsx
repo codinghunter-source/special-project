@@ -48,7 +48,7 @@ export default function BackgroundMusic() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music/Suno.mp3" preload="auto" />
+      <audio ref={audioRef} src="/music/Dooron1.mp3" preload="auto" />
 
       {/* <button
         onClick={toggleMusic}
