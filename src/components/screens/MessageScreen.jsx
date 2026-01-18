@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, MoveRight } from "lucide-react";
 
 const message = `
-Bas ek baat share karni thi. Aap ek simple aur special way mein kaafi alag ho.
-Aapke bolne mein ek calmness hai aur aapki smile mein ek warmth, jo achha feel karati hai.
-Aap kuch extra banne ki koshish nahi karte — aap jaise ho, waise hi kaafi achhe ho, aur wahi aapko special banata hai.
+I just wanted to tell you something... you really are special in a way that’s hard to explain.  
+There’s a softness in the way you talk, a sweetness in the way you smile, and something genuine about you that just feels good to be around.  
+You don’t try to be anything extra, you’re just you, and that’s what makes you so lovely.
 `;
 
 export default function MessageScreen({ onNext }) {
