@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Heart, MoveRight } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Heart, MoveRight } from "lucide-react";
 
 const compliments = [
   "Aap bahut achhi lagti ho",
@@ -10,10 +10,10 @@ const compliments = [
   "Aapse baat karke mann halka feel karta hai",
   "Aapke hone se chhoti baatein bhi khaas lagti hain",
   "Aapki wajah se cheezein aur special lagti hain",
-]
+];
 
 function Card({ text }) {
-  const [revealed, setRevealed] = useState(false)
+  const [revealed, setRevealed] = useState(false);
 
   return (
     <motion.div
@@ -32,13 +32,15 @@ function Card({ text }) {
     >
       {/* Heart overlay */}
       {!revealed && (
-        <div className="
+        <div
+          className="
           absolute inset-0
           bg-linear-to-br from-pink-500/10 to-rose-500/10
           backdrop-blur-sm
           flex items-center justify-center
           pointer-events-none
-        ">
+        "
+        >
           <Heart className="w-6 h-6 text-pink-300 opacity-80" />
         </div>
       )}
@@ -53,14 +55,13 @@ function Card({ text }) {
         {text}
       </motion.p>
     </motion.div>
-  )
+  );
 }
 
 export default function ComplimentsScreen({ onNext }) {
   return (
     <motion.div className="flex flex-col items-center justify-center h-full w-full text-center">
       <div className="w-full max-w-xl mx-auto flex flex-col items-center gap-8">
-
         {/* Center heart */}
         <motion.div
           className="
@@ -74,7 +75,10 @@ export default function ComplimentsScreen({ onNext }) {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
         >
-          <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+          <motion.div
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
             <Heart className="w-14 h-14 text-pink-400 fill-pink-400" />
           </motion.div>
         </motion.div>
@@ -94,7 +98,12 @@ export default function ComplimentsScreen({ onNext }) {
             Lorem ipsum dolor sit amet.
           </p>
 
-          <p className="text-sm md:text-base text-foreground/75">
+          <p
+            className="mt-2 
+            text-xs sm:text-sm md:text-base
+            text-foreground/75
+            leading-relaxed
+            ">
             Tap each one to reveal
           </p>
         </div>
@@ -128,8 +137,7 @@ export default function ComplimentsScreen({ onNext }) {
             <MoveRight size={20} className="fill-current" />
           </motion.button>
         </motion.div>
-
       </div>
     </motion.div>
-  )
+  );
 }

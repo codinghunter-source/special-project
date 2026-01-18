@@ -18,25 +18,29 @@ export default function MessageScreen({ onNext }) {
 
   /* 🖋 Typewriter effect */
   useEffect(() => {
-    if (!opened) return;
+  if (!opened) return;
 
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < message.length) {
-        setCurrentText((prev) => prev + message[index]);
-        index++;
+  let index = 0;
+  let cancelled = false;
 
-        if (scrollRef.current) {
-          scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-        }
-      } else {
-        clearInterval(timer);
-        setShowCursor(false);
-      }
-    }, 20); // typing speed
+  const type = () => {
+    if (cancelled) return;
 
-    return () => clearInterval(timer);
-  }, [opened]);
+    if (index < message.length) {
+      setCurrentText(message.slice(0, index + 1));
+      index++;
+      setTimeout(type, 35); // typing speed
+    }
+  };
+
+  type();
+
+  return () => {
+    cancelled = true;
+  };
+}, [opened]);
+
+
 
   return (
     <div className="flex flex-col items-center justify-center p-4 relative overflow-hidden">
